@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UI/UX Designer &amp; Developer | Portfolio</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-black': '#0D0D0D',
+            'brand-gold': '#D4AF37',
+            'brand-gray': '#BDBDBD',
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+          },
+          borderRadius: {
+            'theme': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+      animation: float 6s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(90deg, #D4AF37 0%, #F4D03F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  
+    @keyframes marquee-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .text-outline {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+      color: transparent;
+    }
+  
+    .skills-hover-effect {
+      transition: background-color 0.7s ease, backdrop-filter 0.7s ease;
+    }
+    .skills-hover-effect:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+    }
+  
+    @keyframes marquee-infinite {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marquee-infinite-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .animate-marquee-infinite {
+      animation: marquee-infinite 30s linear infinite;
+    }
+    .animate-marquee-infinite-reverse {
+      animation: marquee-infinite-reverse 30s linear infinite;
+    }
+  </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js">
+  window.addEventListener('load', () => {
+    const container = document.getElementById('illustration-container');
+    const image = container.querySelector('img');
+    const glow = document.getElementById('illustration-glow');
+
+    if (!container || !image || !glow) return;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -15; // Max 15 degrees
+      const rotateY = ((x - centerX) / centerX) * 15;
+      
+      const moveX = ((x - centerX) / centerX) * 20; // Max 20px shift for glow
+      const moveY = ((y - centerY) / centerY) * 20;
+
+      gsap.to(image, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        duration: 0.5,
+        ease: 'power2.out',
+        transformPerspective: 1000
+      });
+
+      gsap.to(glow, {
+        x: moveX,
+        y: moveY,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    });
+
+    container.addEventListener('mouseleave', () => {
+      gsap.to(image, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.8,
+        ease: 'elastic.out(1, 0.5)'
+      });
+      gsap.to(glow, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: 'elastic.out(1, 0.5)'
+      });
+    });
+  });
+</script></head>
+<body class="bg-brand-black text-white font-sans selection:bg-brand-gold selection:text-brand-black overflow-x-hidden">
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 md:py-6" data-purpose="main-nav">
+<div class="max-w-7xl mx-auto flex justify-between items-center glass-card p-4 rounded-theme">
+<div class="text-2xl font-bold tracking-tighter">
+<span class="text-brand-gold">.</span>STUDIO
+      </div>
+<div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-widest">
+<a class="hover:text-brand-gold transition-colors" href="#about">About</a>
+<a class="hover:text-brand-gold transition-colors" href="#work">Work</a>
+<a class="hover:text-brand-gold transition-colors" href="#process">Process</a>
+<a class="hover:text-brand-gold transition-colors" href="#contact">Contact</a>
+</div>
+<a class="px-6 py-2 border border-brand-gold text-brand-gold rounded-theme text-xs font-bold uppercase hover:bg-brand-gold hover:text-brand-black transition-all" href="#contact">
+        Hire Me
+      </a>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: Hero Section -->
+<section class="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden" data-purpose="hero-section" id="hero">
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-8 items-center z-10">
+<div class="col-span-12 lg:col-span-7">
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-8">
+          Designing Digital <br/>
+<span class="gold-gradient-text">Experiences</span> <br/>
+          That Feel Effortless
+        </h1>
+<p class="text-brand-gray text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+          I bridge the gap between aesthetics and functionality. A UI/UX designer and front-end developer obsessed with pixel-perfect craft.
+        </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="px-10 py-5 bg-white text-brand-black font-bold rounded-theme text-center hover:scale-105 transition-transform" href="#work">
+            View Projects
+          </a>
+<a class="px-10 py-5 border border-white/20 hover:bg-white/5 rounded-theme text-center transition-all" href="#contact">
+            Get In Touch
+          </a>
+</div>
+</div>
+<!-- Floating UI Elements -->
+<div class="hidden lg:col-span-5 lg:block relative h-[500px]">
+<div class="absolute top-0 right-0 w-64 h-80 glass-card rounded-theme p-6 animate-float z-20">
+<div class="w-12 h-12 bg-brand-gold/20 rounded-full mb-4 flex items-center justify-center">
+<div class="w-6 h-6 bg-brand-gold rounded-full"></div>
+</div>
+<div class="h-4 w-3/4 bg-white/10 rounded mb-2"></div>
+<div class="h-4 w-full bg-white/10 rounded mb-6"></div>
+<div class="space-y-2">
+<div class="h-2 w-full bg-white/5 rounded"></div>
+<div class="h-2 w-5/6 bg-white/5 rounded"></div>
+<div class="h-2 w-4/6 bg-white/5 rounded"></div>
+</div>
+</div>
+<div class="absolute bottom-10 -left-10 w-72 h-48 glass-card rounded-theme p-6 animate-float-delayed z-10">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 bg-white/20 rounded-full"></div>
+<div class="h-3 w-24 bg-white/20 rounded"></div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="h-16 bg-white/5 rounded"></div>
+<div class="h-16 bg-white/5 rounded"></div>
+<div class="h-16 bg-white/5 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decor -->
+<div class="absolute top-1/4 -right-20 w-96 h-96 bg-brand-gold/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-brand-gold/5 blur-[120px] rounded-full"></div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: About Section -->
+<section class="py-24 px-6 md:px-12" data-purpose="about-section" id="about">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<h2 class="text-3xl md:text-5xl font-bold mb-8">Crafting Interfaces, <br/> Building Experiences</h2>
+<p class="text-brand-gray text-lg mb-8 leading-relaxed">
+            With over 5 years of experience in the digital space, I specialize in creating intuitive user interfaces that don't just look beautiful but solve real business problems. My approach is rooted in design thinking and technical excellence.
+          </p>
+<!-- Skill Badges -->
+<div class="flex flex-wrap gap-3" data-purpose="skill-badges">
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">UI Design</span>
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">UX Research</span>
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">Figma</span>
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">React.js</span>
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">Tailwind CSS</span>
+<span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium">GSAP</span>
+</div>
+</div>
+<div class="order-1 md:order-2">
+<div class="relative group">
+<div class="absolute -inset-4 border border-brand-gold/30 rounded-theme group-hover:scale-105 transition-transform duration-500"></div>
+<img alt="Designer Portrait" class="relative w-full grayscale hover:grayscale-0 transition-all duration-500 rounded-theme object-cover aspect-[4/5]" id="about-image" src="/images/hero.jpeg"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: About Section -->
+<!-- BEGIN: Featured Work -->
+<section class="py-24 px-6 md:px-12 bg-white/5" data-purpose="work-section" id="work">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h4 class="text-brand-gold uppercase tracking-[0.3em] text-sm mb-4">Portfolio</h4>
+<h2 class="text-4xl md:text-6xl font-bold">Featured Projects</h2>
+</div>
+<a class="hidden md:block group text-brand-gold font-bold" href="https://www.behance.net/gihanpradeep">
+          View All Projects 
+          <span class="inline-block group-hover:translate-x-2 transition-transform">→</span>
+</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="project-grid">
+<!-- Project Card 1 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/mockuper.png"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">UI/UX • Dashboard</span>
+<h3 class="text-3xl font-bold mb-4">Eventsync</h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              A minimalist dashboard designed to show Event management habits.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://www.behance.net/gallery/222426245/Eventsync">View </a>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/Car detail.png"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">Web Design • Retail</span>
+<h3 class="text-3xl font-bold mb-4">Beauticar </h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Bringing a showroom shine to your car with expert detailing and a clean, easy-to-use site.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://www.behance.net/gallery/240607421/Beauticar-car-detailing-website">View </a>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/thumbnail.png"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">Mobile App • Fit</span>
+<h3 class="text-3xl font-bold mb-4">Fittrack</h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Tracking your progress with clean visuals and easy-to-use tools.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://www.behance.net/gallery/220798729/Fitness-tracking-app">View</a>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/toolkit.png"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">Landing page • dev • tool</span>
+<h3 class="text-3xl font-bold mb-4">Toolkit</h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Making work simple by putting everything you need on one screen.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://snazzy-kataifi-e96e8c.netlify.app/">View</a>
+</div>
+</div>
+<!-- Project Card 5 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/Artdach.png"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">Web Design • Retail</span>
+<h3 class="text-3xl font-bold mb-4">Artdach</h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Protecting your home with expert roofing and a simple, honest process.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://www.behance.net/gallery/240606829/Artdach">View</a>
+</div>
+</div>
+<!-- Project Card 6 -->
+<div class="group relative overflow-hidden rounded-theme" data-purpose="project-card">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="/images/coffee.jpg"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<span class="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">Landing page • Retail</span>
+<h3 class="text-3xl font-bold mb-4">Luxe Furnishing</h3>
+<p class="text-brand-gray text-sm mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Freshly baked goods delivered to your door with a simple, easy-to-use site.
+            </p>
+<a class="w-fit text-sm font-bold border-b border-brand-gold pb-1 opacity-0 group-hover:opacity-100 transition-all" href="https://www.behance.net/gallery/167529475/backery">View</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Featured Work -->
+<!-- BEGIN: Design Process -->
+<section class="py-24 px-6 md:px-12" data-purpose="process-section" id="process">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-20">The Process</h2>
+<div class="relative">
+<!-- Horizontal Line (Hidden on mobile, visible on desktop) -->
+<div class="hidden lg:block absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 relative">
+<!-- Step 1 -->
+<div class="text-center group" data-purpose="process-step">
+<div class="w-16 h-16 bg-brand-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors relative z-10 bg-brand-black">
+<span class="text-xl font-bold">01</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Research</h4>
+<p class="text-brand-gray text-sm">Deep diving into user needs and market trends.</p>
+</div>
+<!-- Step 2 -->
+<div class="text-center group" data-purpose="process-step">
+<div class="w-16 h-16 bg-brand-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors relative z-10 bg-brand-black">
+<span class="text-xl font-bold">02</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Wireframe</h4>
+<p class="text-brand-gray text-sm">Mapping out flows and structural foundations.</p>
+</div>
+<!-- Step 3 -->
+<div class="text-center group" data-purpose="process-step">
+<div class="w-16 h-16 bg-brand-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors relative z-10 bg-brand-black">
+<span class="text-xl font-bold">03</span>
+</div>
+<h4 class="font-bold text-lg mb-2">UI Design</h4>
+<p class="text-brand-gray text-sm">Applying visual identity and high-fidelity assets.</p>
+</div>
+<!-- Step 4 -->
+<div class="text-center group" data-purpose="process-step">
+<div class="w-16 h-16 bg-brand-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors relative z-10 bg-brand-black">
+<span class="text-xl font-bold">04</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Prototype</h4>
+<p class="text-brand-gray text-sm">Validating interactions and user experience.</p>
+</div>
+<!-- Step 5 -->
+<div class="text-center group" data-purpose="process-step">
+<div class="w-16 h-16 bg-brand-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors relative z-10 bg-brand-black">
+<span class="text-xl font-bold">05</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Develop</h4>
+<p class="text-brand-gray text-sm">Turning designs into scalable, live products.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Design Process -->
+<!-- BEGIN: Skills Section -->
+<section class="py-24 px-6 md:px-12 bg-white/5 relative" data-purpose="skills-section" style="opacity: 1;">
+<div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+<!-- First Diagonal Label (Top-Left to Bottom-Right) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] rotate-[15deg] opacity-20 pointer-events-none">
+<div class="flex whitespace-nowrap animate-marquee-infinite">
+<span class="text-7xl md:text-9xl font-black uppercase py-4 bg-brand-gold text-black px-4">
+        UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • 
+      </span>
+<span class="text-7xl md:text-9xl font-black uppercase py-4 bg-brand-gold text-black px-4">
+        UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • 
+      </span>
+</div>
+</div>
+<!-- Second Diagonal Label (Bottom-Left to Top-Right) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] -rotate-[15deg] opacity-20 pointer-events-none">
+<div class="flex whitespace-nowrap animate-marquee-infinite-reverse">
+<span class="text-7xl md:text-9xl font-black uppercase py-4 bg-brand-gold text-black px-4">
+        UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • 
+      </span>
+<span class="text-7xl md:text-9xl font-black uppercase py-4 bg-brand-gold text-black px-4">
+        UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • UI/UX DESIGN • FRONTEND • REACT • FIGMA • GSAP • 
+      </span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+<div>
+<h2 class="text-4xl font-bold mb-6">Mastering the <br/> <span class="text-brand-gold">Modern Stack</span></h2>
+<p class="text-brand-gray mb-10">Continuously evolving my toolkit to build high-performance, accessible, and delightful digital interfaces.</p>
+<div class="space-y-6">
+<!-- Figma -->
+<div data-purpose="skill-item">
+<div class="flex justify-between mb-2">
+<span class="font-bold">Figma &amp; UI Design</span>
+<span class="text-brand-gold">95%</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-gold rounded-full transition-all duration-1000" data-progress="95%" style="width: 0%;"></div>
+</div>
+</div>
+<!-- React -->
+<div data-purpose="skill-item">
+<div class="flex justify-between mb-2">
+<span class="font-bold">React</span>
+<span class="text-brand-gold">90%</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-gold rounded-full transition-all duration-1000" data-progress="90%" style="width: 0%;"></div>
+</div>
+</div>
+<!-- Javascript -->
+<div data-purpose="skill-item">
+<div class="flex justify-between mb-2">
+<span class="font-bold">JavaScript</span>
+<span class="text-brand-gold">65%</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-gold rounded-full transition-all duration-1000" data-progress="65%" style="width: 0%;"></div>
+</div>
+</div>
+<!-- Html,Css -->
+<div data-purpose="skill-item">
+<div class="flex justify-between mb-2">
+<span class="font-bold">Html,Css</span>
+<span class="text-brand-gold">95%</span>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-gold rounded-full transition-all duration-1000" data-progress="95%" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-8 border border-white/10 rounded-theme flex flex-col justify-center items-center text-center hover:bg-yellow-400 transition-colors hover:text-black">
+<h5 class="text-3xl font-bold mb-2 ">14+</h5>
+<p class="text-xs uppercase tracking-widest ">Projects Completed</p>
+</div>
+<div class="p-8 border border-white/10 rounded-theme flex flex-col justify-center items-center text-center hover:bg-yellow-400 transition-colors hover:text-black">
+<h5 class="text-3xl font-bold mb-2">3+</h5>
+<p class="text-xs uppercase tracking-widest ">Global Clients</p>
+</div>
+<div class="p-8 border border-white/10 rounded-theme flex flex-col justify-center items-center text-center hover:bg-yellow-400 transition-colors hover:text-black">
+<h5 class="text-3xl font-bold mb-2">3yr</h5>
+<p class="text-xs uppercase tracking-widest ">Experience</p>
+</div>
+<div class="p-8 border border-white/10 rounded-theme flex flex-col justify-center items-center text-center hover:bg-yellow-400 transition-colors hover:text-black">
+<h5 class="text-3xl font-bold mb-2">100%</h5>
+<p class="text-xs uppercase tracking-widest ">Satisfaction</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Skills Section -->
+<!-- BEGIN: Testimonials Section -->
+<section class="py-24 px-6 md:px-12 bg-brand-black overflow-hidden" data-purpose="inquiry-section" id="project-inquiry">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<!-- Left: Animated Character Container -->
+<div class="flex justify-center items-center relative order-2 lg:order-1">
+<div class="w-full max-w-md">
+<div class="relative group" id="illustration-container">
+<div class="absolute -inset-4 bg-brand-gold/10 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-600" id="illustration-glow"></div>
+<img alt="Gini Raksha - Fire Devil Illustration" class="relative w-full h-auto drop-shadow-[0_0_50px_rgba(212,175,55,0.3)]" src="/images/raksha.png"/>
+</div>
+<p class="text-center mt-8 text-brand-gray font-medium italic">“Fiery designs, legendary results.”</p>
+</div>
+</div>
+<!-- Right: Inquiry Form -->
+<div class="glass-card p-8 md:p-12 rounded-theme order-1 lg:order-2">
+<h2 class="text-3xl md:text-4xl font-bold mb-8">
+          Tell me what <br/> <span class="text-brand-gold">you need</span>
+</h2>
+<form class="space-y-6" onsubmit="event.preventDefault()">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Dropdown 1: Service Type -->
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Service Type</label>
+<select class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white">
+<option class="bg-brand-black">UI/UX Design</option>
+<option class="bg-brand-black">Web Development</option>
+<option class="bg-brand-black">Mobile App</option>
+<option class="bg-brand-black">Branding</option>
+</select>
+</div>
+<!-- Dropdown 2: Budget Range -->
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Budget Range</label>
+<select class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white">
+<option class="bg-brand-black">$2k - $5k</option>
+<option class="bg-brand-black">$5k - $10k</option>
+<option class="bg-brand-black">$10k - $25k</option>
+<option class="bg-brand-black">$25k+</option>
+</select>
+</div>
+<!-- Dropdown 3: Timeline -->
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Timeline</label>
+<select class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white">
+<option class="bg-brand-black">Less than 1 month</option>
+<option class="bg-brand-black">1-3 months</option>
+<option class="bg-brand-black">3-6 months</option>
+<option class="bg-brand-black">Flexible</option>
+</select>
+</div>
+<!-- Dropdown 4: Industry -->
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Industry</label>
+<select class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white">
+<option class="bg-brand-black">Fintech</option>
+<option class="bg-brand-black">E-commerce</option>
+<option class="bg-brand-black">SaaS</option>
+<option class="bg-brand-black">Healthcare</option>
+</select>
+</div>
+<!-- Dropdown 5: Priority Level (Full Width) -->
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Priority Level</label>
+<select class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white">
+<option class="bg-brand-black">Standard</option>
+<option class="bg-brand-black">High (ASAP)</option>
+<option class="bg-brand-black">Low (Planning Stage)</option>
+</select>
+</div>
+</div>
+<!-- Message Area -->
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase tracking-widest text-brand-gray font-bold">Message</label>
+<textarea class="bg-white/5 border border-white/10 rounded-theme px-4 py-3 text-sm focus:border-brand-gold outline-none text-white resize-none" placeholder="Describe your project goals..." rows="4"></textarea>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-5 bg-brand-gold text-brand-black font-bold rounded-theme uppercase tracking-widest text-sm hover:scale-[1.02] transition-transform" type="submit">
+            Submit Request
+          </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Testimonials Section -->
+<!-- BEGIN: Contact Section -->
+<section class="py-24 px-6 md:px-12 border-t border-white/10" data-purpose="contact-section" id="contact">
+<div class="max-w-7xl mx-auto text-center">
+<h2 class="text-5xl md:text-8xl font-bold mb-10">Let’s Build Something <br/> <span class="gold-gradient-text">Amazing</span></h2>
+<p class="text-brand-gray text-xl max-w-2xl mx-auto mb-16">
+        Whether you have a fully-formed idea or just the start of one, I’m here to help bring it to life.
+      </p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-20">
+<a class="text-2xl md:text-4xl font-bold hover:text-brand-gold transition-colors underline underline-offset-8 decoration-brand-gold/30" href="mailto:hello@studio.com">
+          Pgihan29@gmail.com
+        </a>
+<span class="hidden md:block text-brand-gold">|</span>
+<div class="flex gap-8 text-sm uppercase tracking-widest font-bold">
+<a class="hover:text-brand-gold" href="#">LinkedIn</a>
+<a class="hover:text-brand-gold" href="https://www.behance.net/gihanpradeep">Behance</a>
+<a class="hover:text-brand-gold" href="https://www.instagram.com/wlf_sha/">Instagram</a>
+</div>
+</div>
+<a class="inline-block px-12 py-6 bg-brand-gold text-brand-black font-bold rounded-theme text-lg hover:scale-105 transition-transform" href="mailto:Pgihan29@gmail.com">
+        Get In Touch
+      </a>
+</div>
+</section>
+<!-- END: Contact Section -->
+<!-- BEGIN: Footer -->
+<footer class="py-12 px-6 md:px-12 border-t border-white/5" data-purpose="main-footer">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-brand-gray text-sm">
+        © 2026 . Built with passion &amp; precision.
+      </div>
+<div class="flex gap-6">
+<a class="text-brand-gray hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+<a class="text-brand-gray hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.493-1.1-1.1s.493-1.1 1.1-1.1 1.1.493 1.1 1.1-.493 1.1-1.1 1.1zm9 6.891h-2v-3.868c0-2.147-2.563-1.984-2.563 0v3.868h-2v-6h2v.951c.902-1.669 4.563-1.791 4.563 1.594v3.455z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- BEGIN: Custom Scripts -->
+<script data-purpose="scroll-animations">
+    // Simple observer to trigger animation classes when elements come into view
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }, observerOptions);
+
+    // Apply basic reveal effect to sections
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-0', 'translate-y-10');
+      observer.observe(section);
+    });
+  </script>
+<!-- END: Custom Scripts -->
+<script data-purpose="gsap-skills-animation">
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener('load', () => {
+    const skillsSection = document.querySelector('[data-purpose="skills-section"]');
+    
+    // Progress Bars Animation
+    const progressBars = document.querySelectorAll('[data-purpose="skill-item"] .h-full');
+    progressBars.forEach(bar => {
+      const targetWidth = bar.getAttribute('data-progress');
+      gsap.to(bar, {
+        width: targetWidth,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: skillsSection,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+  });
+</script><script>
+  window.addEventListener('load', () => {
+    const container = document.getElementById('illustration-container');
+    const image = container.querySelector('img');
+    const glow = document.getElementById('illustration-glow');
+
+    if (!container || !image || !glow) return;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -15; // Max 15 degrees
+      const rotateY = ((x - centerX) / centerX) * 15;
+      
+      const moveX = ((x - centerX) / centerX) * 20; // Max 20px shift for glow
+      const moveY = ((y - centerY) / centerY) * 20;
+
+      gsap.to(image, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        duration: 0.5,
+        ease: 'power2.out',
+        transformPerspective: 1000
+      });
+
+      gsap.to(glow, {
+        x: moveX,
+        y: moveY,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    });
+
+    container.addEventListener('mouseleave', () => {
+      gsap.to(image, {
+        rotateX: 0,
+        rotateY: 0,
+        duration: 0.8,
+        ease: 'elastic.out(1, 0.5)'
+      });
+      gsap.to(glow, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: 'elastic.out(1, 0.5)'
+      });
+    });
+  });
+</script></body></html>
